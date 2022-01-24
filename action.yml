@@ -1,4 +1,4 @@
-name: setup brew tools
+name: install/cache brew tools
 
 inputs:
   tools:     { required: false, type: string }

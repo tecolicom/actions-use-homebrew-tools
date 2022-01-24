@@ -10,6 +10,9 @@ cached archive.
 When valid cached archive is not found, all packages are installed by
 `brew` command.  Incremental installation is not supported.
 
+This actions assumes `brew` command is already installed.  So please
+install it before calling if not available.
+
 Installed files are taken by comparing directory before and after
 installation.  So it takes time to find them if many files are already
 installed before command execution.
