@@ -1,0 +1,28 @@
+name: setup brew tools
+
+inputs:
+  tools:     { required: false, type: string }
+  cache:     { required: false, type: string, default: yes }
+  cache-gen: { required: false, type: string, default: v1 }
+
+outputs:
+  cache-hit:
+    value: ${{ steps.cache-updates.outputs.cache-hit }}
+
+runs:
+  using: composite
+  steps:
+
+    - id: setup
+      shell: bash
+      run: |
+        echo "::set-output name=prefix::$(brew --prefix)"
+
+    - id: cache-updates
+      uses: office-tecoli/actions-cache-updates@v0
+      with:
+        command:   brew install
+        target:    ${{ inputs.tools }}
+        directory: ${{ steps.setup.outputs.prefix }}
+        cache:     ${{ inputs.cache }}
+        cache-gen: ${{ inputs.cache-gen }}

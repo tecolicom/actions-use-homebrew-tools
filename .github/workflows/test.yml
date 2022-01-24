@@ -1,0 +1,44 @@
+name: test
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+
+  initial:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: setup
+        run: |
+          prefix=$(brew --prefix)
+          echo "::set-output name=prefix::$prefix"
+      - uses: ./
+        id: action
+        with:
+          cache: workflow
+          tools: rcs
+      - run: rcs --version
+      - run: test "${{ steps.action.outputs.cache-hit }}" != true
+
+  cached:
+    needs: initial
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: setup
+        run: |
+          prefix=$(brew --prefix)
+          echo "::set-output name=prefix::$prefix"
+      - uses: ./
+        id: action
+        with:
+          cache: workflow
+          tools: rcs
+      - run: rcs --version
+      - run: test "${{ steps.action.outputs.cache-hit }}" == true
+
