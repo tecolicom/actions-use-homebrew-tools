@@ -7,7 +7,7 @@ inputs:
 
 outputs:
   cache-hit:
-    value: ${{ steps.cache-updates.outputs.cache-hit }}
+    value: ${{ steps.update.outputs.cache-hit }}
 
 runs:
   using: composite
@@ -19,7 +19,7 @@ runs:
         echo "::set-output name=command::brew install"
         echo "::set-output name=prefix::$(brew --prefix)"
 
-    - id: install-and-cache
+    - id: update
       uses: office-tecoli/actions-cache-installed-files@v0
       with:
         command:   ${{ steps.setup.outputs.command }}
