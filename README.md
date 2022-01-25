@@ -57,3 +57,10 @@ Output is same as
   with:
     tools: rcs
 ```
+
+## See Also
+
+### [`@office-tecoli/actions-install-and-cache`](https://github.com/office-tecoli/actions-install-and-cache)
+
+This action is just a glue for
+[`@actions-install-and-cache`](https://github.com/office-tecoli/actions-install-and-cache).
