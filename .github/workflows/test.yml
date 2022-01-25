@@ -13,10 +13,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - id: setup
-        run: |
-          prefix=$(brew --prefix)
-          echo "::set-output name=prefix::$prefix"
       - uses: ./
         id: action
         with:
@@ -30,10 +26,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - id: setup
-        run: |
-          prefix=$(brew --prefix)
-          echo "::set-output name=prefix::$prefix"
       - uses: ./
         id: action
         with:
@@ -41,4 +33,3 @@ jobs:
           tools: rcs
       - run: rcs --version
       - run: test "${{ steps.action.outputs.cache-hit }}" == true
-
