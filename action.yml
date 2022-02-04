@@ -16,6 +16,7 @@ runs:
     - id: setup
       shell: bash
       run: |
+        : setup
         echo "::set-output name=command::brew install"
         echo "::set-output name=prefix::$(brew --prefix)"
 
