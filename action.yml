@@ -16,7 +16,7 @@ runs:
     - id: setup
       shell: bash
       run: |
-        : setup ${{ github.repository }}
+        : setup use-brew-tools
         echo "::set-output name=command::brew install"
         echo "::set-output name=prefix::$(brew --prefix)"
 
