@@ -4,6 +4,7 @@ inputs:
   tools:     { required: false, type: string }
   cache:     { required: false, type: string, default: yes }
   cache-gen: { required: false, type: string, default: v1 }
+  key:       { required: false, type: string }
 
 outputs:
   cache-hit:
@@ -17,8 +18,12 @@ runs:
       shell: bash
       run: |
         : setup use-brew-tools
+        given_key="${{ inputs.key }}"
+        version_key="$( brew --version | (md5sum||md5) | awk '{print $1}' )"
+        key="${given_key:+$given_key-}${version_key}"
         echo "::set-output name=command::brew install"
         echo "::set-output name=prefix::$(brew --prefix)"
+        echo "::set-output name=key::$key"
 
     - id: update
       uses: office-tecoli/actions-install-and-cache@v0
@@ -28,3 +33,4 @@ runs:
         target:    ${{ inputs.tools }}
         cache:     ${{ inputs.cache }}
         cache-gen: ${{ inputs.cache-gen }}
+        key:       ${{ steps.setup.outputs.key }}
