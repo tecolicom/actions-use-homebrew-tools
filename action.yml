@@ -3,7 +3,6 @@ name: install/cache brew tools
 inputs:
   tools:     { required: false, type: string }
   cache:     { required: false, type: string, default: yes }
-  cache-gen: { required: false, type: string, default: v1 }
   key:       { required: false, type: string }
 
 outputs:
@@ -32,5 +31,4 @@ runs:
         directory: ${{ steps.setup.outputs.prefix }}
         target:    ${{ inputs.tools }}
         cache:     ${{ inputs.cache }}
-        cache-gen: ${{ inputs.cache-gen }}
         key:       ${{ steps.setup.outputs.key }}
