@@ -2,7 +2,7 @@
 
 ![actions-use-brew-tools](https://github.com/office-tecoli/actions-use-brew-tools/actions/workflows/test.yml/badge.svg)
 
-This Github action isntall homebrew packages and cache them for later
+This GitHub action isntall homebrew packages and cache them for later
 use.  When executed next time with same package list, and any other
 environment are not changed, installed files are extracted from the
 cached archive.
@@ -26,7 +26,7 @@ Output is same as
 # inputs:
 #   tools: { required: true,  type: string }
 #   cache: { required: false, type: string, default: yes }
-#   key:   { required: false, type: string, default: v1 }
+#   key:   { required: false, type: string }
 
 - uses: office-tecoli/actions-use-brew-tools@v0
   with:
