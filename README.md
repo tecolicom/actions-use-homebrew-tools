@@ -34,7 +34,7 @@ Output is same as
     # homebrew packages
     tools: ''
 
-    # Cache strategey
+    # Cache strategy
     #
     # yes:      activate cache
     # no:       no cache
