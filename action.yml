@@ -1,9 +1,9 @@
 name: install/cache brew tools
 
 inputs:
-  tools:     { required: false, type: string }
-  cache:     { required: false, type: string, default: yes }
-  key:       { required: false, type: string }
+  tools: { required: false, type: string }
+  cache: { required: false, type: string, default: yes }
+  key:   { required: false, type: string }
 
 outputs:
   cache-hit:
