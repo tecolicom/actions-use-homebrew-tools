@@ -1,6 +1,6 @@
 # actions-use-brew-tools
 
-![actions-use-brew-tools](https://github.com/office-tecoli/actions-use-brew-tools/actions/workflows/test.yml/badge.svg)
+![actions-use-brew-tools](https://github.com/tecoli-com/actions-use-brew-tools/actions/workflows/test.yml/badge.svg)
 
 This GitHub action isntall homebrew packages and cache them for later
 use.  When executed next time with same package list, and any other
@@ -28,7 +28,7 @@ Output is same as
 #   cache: { required: false, type: string, default: yes }
 #   key:   { required: false, type: string }
 
-- uses: office-tecoli/actions-use-brew-tools@v0
+- uses: tecoli-com/actions-use-brew-tools@v0
   with:
 
     # homebrew packages
@@ -49,16 +49,16 @@ Output is same as
 ## Example
 
 ```yaml
-- uses: office-tecoli/actions-use-brew-tools@v0
+- uses: tecoli-com/actions-use-brew-tools@v0
   with:
     tools: rcs
 ```
 
 ## See Also
 
-### [office-tecoli/actions](https://github.com/office-tecoli/actions)
+### [tecoli-com/actions](https://github.com/tecoli-com/actions)
 
-### [`@office-tecoli/actions-install-and-cache`](https://github.com/office-tecoli/actions-install-and-cache)
+### [`@tecoli-com/actions-install-and-cache`](https://github.com/tecoli-com/actions-install-and-cache)
 
 This action is just a glue for
-[`@actions-install-and-cache`](https://github.com/office-tecoli/actions-install-and-cache).
+[`@actions-install-and-cache`](https://github.com/tecoli-com/actions-install-and-cache).
