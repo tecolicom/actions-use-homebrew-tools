@@ -1,4 +1,9 @@
-name: install/cache brew tools
+name: install/cache homebrew tools
+description: 'GitHub Action to install and cache homebrew tools'
+author: 'Office TECOLI, LLC'
+branding: 
+  color: 'orange'
+  icon: 'plus-square'
 
 inputs:
   tools: { required: false, type: string }
