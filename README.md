@@ -1,6 +1,6 @@
-# actions-use-brew-tools
+# actions-use-homebrew-tools
 
-![actions-use-brew-tools](https://github.com/tecoli-com/actions-use-brew-tools/actions/workflows/test.yml/badge.svg)
+![actions-use-homebrew-tools](https://github.com/tecoli-com/actions-use-homebrew-tools/actions/workflows/test.yml/badge.svg)
 
 This GitHub action isntall homebrew packages and cache them for later
 use.  When executed next time with same package list, and any other
@@ -28,7 +28,7 @@ Output is same as
 #   cache: { required: false, type: string, default: yes }
 #   key:   { required: false, type: string }
 
-- uses: tecoli-com/actions-use-brew-tools@v0
+- uses: tecoli-com/actions-use-homebrew-tools@v0
   with:
 
     # homebrew packages
@@ -49,7 +49,7 @@ Output is same as
 ## Example
 
 ```yaml
-- uses: tecoli-com/actions-use-brew-tools@v0
+- uses: tecoli-com/actions-use-homebrew-tools@v0
   with:
     tools: rcs
 ```
