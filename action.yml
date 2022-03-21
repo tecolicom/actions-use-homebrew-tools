@@ -1,4 +1,4 @@
-name: install/cache homebrew tools
+name: install-and-cache homebrew tools
 description: 'GitHub Action to install and cache homebrew tools'
 author: 'Office TECOLI, LLC'
 branding: 
