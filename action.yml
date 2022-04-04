@@ -23,7 +23,9 @@ runs:
       run: |
         : setup use-homebrew-tools
         given_key="${{ inputs.key }}"
-        version_key="$( brew --version | (md5sum||md5) | awk '{print $1}' )"
+        brew_version="$(brew --version)"
+        echo "$brew_version"
+        version_key="$( echo "$brew_version" | (md5sum||md5) | awk '{print $1}' )"
         key="${given_key:+$given_key-}${version_key}"
         echo "::set-output name=command::brew install"
         echo "::set-output name=prefix::$(brew --prefix)"
