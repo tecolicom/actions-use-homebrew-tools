@@ -1,6 +1,6 @@
 ## v0.3
 
-- Rename parameter "directory" to "path.
+- Rename parameter "directory" to "path".
 
 ## v0
 
