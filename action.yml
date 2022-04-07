@@ -19,6 +19,21 @@ runs:
   using: composite
   steps:
 
+    - id: brew-setup
+      shell: bash
+      run: |
+        : setup homebrew
+        brew --version
+        echo "::set-output name=prefix::$(brew --prefix)"
+
+    - id: brew-update
+      if: inputs.update == 'true'
+      uses: tecoli-com/actions-install-and-cache@v0.4
+      with:
+        run:   brew update
+        path:  ${{ steps.brew-setup.outputs.prefix }}
+        cache: ${{ inputs.cache }}
+
     - id: setup
       shell: bash
       run: |
@@ -35,9 +50,7 @@ runs:
     - id: update
       uses: tecoli-com/actions-install-and-cache@v0.4
       with:
-        run: |-
-          [ "${{ inputs.update }}" = true ] && brew update || :
-          ${{ steps.setup.outputs.command }} ${{ inputs.tools }}
-        path:   ${{ steps.setup.outputs.prefix }}
-        cache:  ${{ inputs.cache }}
-        key:    ${{ steps.setup.outputs.key }}
+        run:   ${{ steps.setup.outputs.command }} ${{ inputs.tools }}
+        path:  ${{ steps.setup.outputs.prefix }}
+        cache: ${{ inputs.cache }}
+        key:   ${{ steps.setup.outputs.key }}
