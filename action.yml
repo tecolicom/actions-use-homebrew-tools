@@ -22,6 +22,7 @@ runs:
       shell: bash
       run: |
         : setup use-homebrew-tools
+        brew update
         given_key="${{ inputs.key }}"
         brew_version="$(brew --version)"
         echo "$brew_version"
