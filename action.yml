@@ -32,10 +32,9 @@ runs:
         echo "::set-output name=key::$key"
 
     - id: update
-      uses: tecoli-com/actions-install-and-cache@v0.3
+      uses: tecoli-com/actions-install-and-cache@v0.4
       with:
-        command: ${{ steps.setup.outputs.command }}
-        path:    ${{ steps.setup.outputs.prefix }}
-        target:  ${{ inputs.tools }}
-        cache:   ${{ inputs.cache }}
-        key:     ${{ steps.setup.outputs.key }}
+        run:    ${{ steps.setup.outputs.command }} ${{ inputs.tools }}
+        path:   ${{ steps.setup.outputs.prefix }}
+        cache:  ${{ inputs.cache }}
+        key:    ${{ steps.setup.outputs.key }}
