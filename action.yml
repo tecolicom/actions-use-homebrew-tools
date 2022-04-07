@@ -6,9 +6,10 @@ branding:
   icon:  type
 
 inputs:
-  tools: { required: false, type: string }
-  cache: { required: false, type: string, default: yes }
-  key:   { required: false, type: string }
+  tools:  { required: false, type: string }
+  cache:  { required: false, type: string, default: yes }
+  key:    { required: false, type: string }
+  update: { required: false, type: boolean, default: true }
 
 outputs:
   cache-hit:
@@ -22,7 +23,6 @@ runs:
       shell: bash
       run: |
         : setup use-homebrew-tools
-        brew update
         given_key="${{ inputs.key }}"
         brew_version="$(brew --version)"
         echo "$brew_version"
@@ -35,7 +35,9 @@ runs:
     - id: update
       uses: tecoli-com/actions-install-and-cache@v0.4
       with:
-        run:    ${{ steps.setup.outputs.command }} ${{ inputs.tools }}
+        run: |-
+          [ "${{ inputs.update }}" = true ] && brew update || :
+          ${{ steps.setup.outputs.command }} ${{ inputs.tools }}
         path:   ${{ steps.setup.outputs.prefix }}
         cache:  ${{ inputs.cache }}
         key:    ${{ steps.setup.outputs.key }}
