@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
       - id: brew-version
         run: |
-          version="$(brew --version | head -1)"
+          version="$(brew --version | sed -n 1p)"
           echo "::set-output name=version::$version"
       - uses: ./
         id: action
@@ -32,21 +32,27 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
+      - id: check
+        run: |
           : check cache status
           initial="${{ needs.initial.outputs.brew-version }}"
           current="$(brew --version | sed -n 1p)"
-          if [ "$initial" != "$current" ]
+          if [ "$initial" = "$current" ]
           then
+              echo "::set-output name=continue::yes"
+          else
               error="Test does not make sence ($initial != $current)"
               echo "$error" 1>&2
               echo "::warning ::$error"
               echo "::stop-commands::$error"
           fi
-      - uses: ./
-        id: action
+      - id: action
+        if: steps.check.continue == 'yes'
+        uses: ./
         with:
           cache: workflow
           tools: rcs
-      - run: test "${{ steps.action.outputs.cache-hit }}" == true
-      - run: rcs --version
+      - run: |
+        if: steps.check.outputs.continue == 'yes'
+          rcs --version
+          test "${{ steps.action.outputs.cache-hit }}" == true
