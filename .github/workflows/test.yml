@@ -11,13 +11,14 @@ jobs:
 
   initial:
     runs-on: macos-latest
+    outputs:
+      brew-version: ${{ steps.brew-version.outputs.version }}
     steps:
       - uses: actions/checkout@v2
-      - run: brew --version > brew-version.0
-      - uses: actions/upload-artifact@v3
-        with:
-          name: brew-version
-          path: brew-version.0
+      - id: brew-version
+        run: |
+          version="$(brew --version | head -1)"
+          echo "::set-output name=version::$version"
       - uses: ./
         id: action
         with:
@@ -31,19 +32,16 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v3
-        with:
-          name: brew-version
-      - run: ls -l; test -f brew-version.0
       - run: |
           : check cache status
-          if brew --version | diff -u brew-version.0 -
+          initial="${{ needs.initial.outputs.brew-version }}"
+          current="$(brew --version | sed -n 1p)"
+          if [ "$initial" != "$current" ]
           then
-              echo brew version is same
-          else
-              error="Test does not make sence, since brew --version does not match."
-              echo "::stop-commands::$error"
+              error="Test does not make sence ($initial != $current)"
               echo "$error" 1>&2
+              echo "::warning ::$error"
+              echo "::stop-commands::$error"
           fi
       - uses: ./
         id: action
