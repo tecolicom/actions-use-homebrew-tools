@@ -34,19 +34,21 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: brew-version
+      - run: ls -l; test -f brew-version.0
+      - run: |
+          : check cache status
+          if brew --version | diff -u brew-version.0 -
+          then
+              echo brew version is same
+          else
+              error="Test does not make sence, since brew --version does not match."
+              echo "::stop-commands::$error"
+              echo "$error" 1>&2
+          fi
       - uses: ./
         id: action
         with:
           cache: workflow
           tools: rcs
-      - run: ls -l
+      - run: test "${{ steps.action.outputs.cache-hit }}" == true
       - run: rcs --version
-      - run: |
-          brew --version > brew-version.1
-          pwd; ls -l
-          if diff -u brew-version.0 brew-version.1
-          then
-              test "${{ steps.action.outputs.cache-hit }}" == true
-          else
-              echo "brew --version does not match"
-          fi
