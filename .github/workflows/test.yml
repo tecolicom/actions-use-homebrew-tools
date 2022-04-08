@@ -13,6 +13,11 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - run: brew --version > brew-version.0
+      - uses: actions/upload-artifact@v3
+        with:
+          name: brew-version
+          path: brew-version.0
       - uses: ./
         id: action
         with:
@@ -26,10 +31,22 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v3
+        with:
+          name: brew-version
       - uses: ./
         id: action
         with:
           cache: workflow
           tools: rcs
+      - run: ls -l
       - run: rcs --version
-      - run: test "${{ steps.action.outputs.cache-hit }}" == true
+      - run: |
+          brew --version > brew-version.1
+          pwd; ls -l
+          if diff -u brew-version.0 brew-version.1
+          then
+              test "${{ steps.action.outputs.cache-hit }}" == true
+          else
+              echo "brew --version does not match"
+          fi
