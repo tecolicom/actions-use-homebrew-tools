@@ -42,9 +42,7 @@ jobs:
               echo "::set-output name=continue::yes"
           else
               error="Test does not make sence ($initial != $current)"
-              echo "$error" 1>&2
               echo "::warning ::$error"
-              echo "::stop-commands::$error"
           fi
       - id: action
         if: steps.check.continue == 'yes'
