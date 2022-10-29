@@ -1,3 +1,7 @@
+## v0.5
+
+- use `$GITHUB_OUTPUT`
+
 ## v0.4
 
 - install-and-{cache,archive} action takes run script
