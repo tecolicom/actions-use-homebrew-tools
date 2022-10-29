@@ -18,7 +18,7 @@ jobs:
       - id: brew-version
         run: |
           version="$(brew --version | sed -n 1p)"
-          echo "::set-output name=version::$version"
+          echo "version=$version" >> $GITHUB_OUTPUT
       - uses: ./
         id: action
         with:
@@ -39,7 +39,7 @@ jobs:
           current="$(brew --version | sed -n 1p)"
           if [ "$initial" = "$current" ]
           then
-              echo "::set-output name=continue::yes"
+              echo "continue=yes" >> $GITHUB_OUTPUT
           else
               error="Test does not make sence ($initial != $current)"
               echo "::warning ::$error"

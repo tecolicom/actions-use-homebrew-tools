@@ -27,9 +27,11 @@ runs:
         echo "$brew_version"
         version_key="$( echo "$brew_version" | (md5sum||md5) | awk '{print $1}' )"
         key="${given_key:+$given_key-}${version_key}"
-        echo "::set-output name=command::brew install"
-        echo "::set-output name=prefix::$(brew --prefix)"
-        echo "::set-output name=key::$key"
+        cat << END >> $GITHUB_OUTPUT
+        command=brew install
+        prefix=$(brew --prefix)
+        key=$key
+        END
 
     - id: update
       uses: tecoli-com/actions-install-and-cache@v0.4
