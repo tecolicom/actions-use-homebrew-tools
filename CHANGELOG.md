@@ -1,3 +1,7 @@
+## v1.1
+
+- Version 1.1
+
 ## v0.5
 
 - use `$GITHUB_OUTPUT`

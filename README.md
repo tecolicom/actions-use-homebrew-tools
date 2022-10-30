@@ -28,7 +28,7 @@ Output is same as
 #   cache: { required: false, type: string, default: yes }
 #   key:   { required: false, type: string }
 
-- uses: tecoli-com/actions-use-homebrew-tools@v0
+- uses: tecolicom/actions-use-homebrew-tools@v1
   with:
 
     # homebrew packages
@@ -49,7 +49,7 @@ Output is same as
 ## Example
 
 ```yaml
-- uses: tecoli-com/actions-use-homebrew-tools@v0
+- uses: tecolicom/actions-use-homebrew-tools@v1
   with:
     tools: rcs
 ```
